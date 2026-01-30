@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مسابقة الحروف الرمضانية 🌙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+font-family:Tajawal,Arial;
+background:linear-gradient(135deg,#0b132b,#1c2541);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+margin:0;
+}
+.box{
+background:rgba(255,255,255,0.12);
+padding:30px;
+border-radius:20px;
+width:100%;
+max-width:420px;
+text-align:center;
+backdrop-filter:blur(10px);
+}
+h1{margin-bottom:10px}
+input,button{
+width:100%;
+padding:14px;
+border-radius:14px;
+border:none;
+font-size:16px;
+margin-top:10px;
+}
+button{
+background:#f9c74f;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{background:#f9844a}
+ul{
+list-style:none;
+padding:0;
+max-height:150px;
+overflow:auto;
+margin-top:15px;
+}
+li{
+background:rgba(255,255,255,0.2);
+padding:8px;
+border-radius:10px;
+margin-bottom:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h1>🌙 مسابقة الحروف</h1>
+<p>مع معاذ – رمضان كريم</p>
+
+<input id="name" placeholder="اكتب اسمك">
+<button onclick="addName()">تسجيل</button>
+
+<h3>الأسماء المسجّلة 📜</h3>
+<ul id="list"></ul>
+</div>
+
+<script>
+let names = JSON.parse(localStorage.getItem("names") || "[]");
+const list = document.getElementById("list");
+
+function render(){
+list.innerHTML="";
+names.forEach(n=>{
+let li=document.createElement("li");
+li.textContent=n;
+list.appendChild(li);
+});
+}
+render();
+
+function addName(){
+let n=document.getElementById("name").value.trim();
+if(!n)return;
+names.push(n);
+localStorage.setItem("names",JSON.stringify(names));
+document.getElementById("name").value="";
+render();
+}
+</script>
+
+</body>
+</html>
